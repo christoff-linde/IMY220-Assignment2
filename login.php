@@ -88,6 +88,14 @@ $pass = isset($_POST["loginPass"]) ? $_POST["loginPass"] : false;
 								if (move_uploaded_file($uploadFile["tmp_name"][$file], $target_file)) {
 									// Upload to DB
 									$insertQuery = "INSERT INTO tbgallery (`image_id`, `user_id`, `filename`) VALUES (NULL, '$userID', '$fileName')";
+
+									if (!$mysqli->query($insertQuery))
+										echo "Error: " . $insertQuery . "<br/>" . $mysqli->error;
+
+									// if ($mysqli->query($insertQuery))
+									// 	echo "Added image to DB <br/>";
+									// else
+									// 	echo "Error: " . $insertQuery . "<br/>" . $mysqli->error;
 								}
 							}
 						} else {
